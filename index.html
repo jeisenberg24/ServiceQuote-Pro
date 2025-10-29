@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceQuote Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Generate accurate service quotes with market-aware pricing.">
+</head>
+<body>
+    <header class="app-header">
+        <div class="container header-content">
+            <h1>ServiceQuote Pro</h1>
+            <p class="tagline">Market-smart quotes in minutes</p>
+        </div>
+    </header>
+
+    <main class="container grid">
+        <section class="card" aria-labelledby="inputs-title">
+            <h2 id="inputs-title">Quote Inputs</h2>
+            <form id="quote-form">
+                <div class="form-row">
+                    <label for="marketRate">Regional Market Rate ($/hr)</label>
+                    <input type="number" id="marketRate" min="0" step="1" required>
+                </div>
+
+                <div class="form-row two-col">
+                    <div>
+                        <label for="hours">Estimated Labor Hours</label>
+                        <input type="number" id="hours" min="0" step="0.25" required>
+                    </div>
+                    <div>
+                        <label for="travelHours">Travel Time (hours)</label>
+                        <input type="number" id="travelHours" min="0" step="0.25" value="0">
+                    </div>
+                </div>
+
+                <div class="form-row two-col">
+                    <div>
+                        <label for="complexity">Job Complexity</label>
+                        <select id="complexity">
+                            <option value="1">Simple</option>
+                            <option value="1.15">Moderate</option>
+                            <option value="1.35">Complex</option>
+                            <option value="1.6">Expert</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="experience">Experience Level</label>
+                        <select id="experience">
+                            <option value="0.95">Entry (discount)</option>
+                            <option value="1" selected>Standard</option>
+                            <option value="1.15">Pro</option>
+                            <option value="1.3">Expert</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row two-col">
+                    <div>
+                        <label for="materials">Materials Cost ($)</label>
+                        <input type="number" id="materials" min="0" step="1" value="0">
+                    </div>
+                    <div>
+                        <label for="equipment">Equipment/Rental ($)</label>
+                        <input type="number" id="equipment" min="0" step="1" value="0">
+                    </div>
+                </div>
+
+                <div class="form-row two-col">
+                    <div>
+                        <label for="marketDemand">Market Demand</label>
+                        <select id="marketDemand">
+                            <option value="0.95">Low</option>
+                            <option value="1" selected>Normal</option>
+                            <option value="1.1">High</option>
+                            <option value="1.2">Peak</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="season">Seasonal Factor</label>
+                        <select id="season">
+                            <option value="0.95">Off-season</option>
+                            <option value="1" selected>Standard</option>
+                            <option value="1.08">Busy season</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row two-col">
+                    <div>
+                        <label for="timeOfDay">Time of Day</label>
+                        <select id="timeOfDay">
+                            <option value="1">Normal hours</option>
+                            <option value="1.25">Evening/Weekend</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="competitor">Competitor Price (optional)</label>
+                        <input type="number" id="competitor" min="0" step="1" placeholder="e.g., 450">
+                    </div>
+                </div>
+
+                <div class="form-row flags">
+                    <label class="checkbox">
+                        <input type="checkbox" id="emergency"> Emergency job
+                    </label>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn primary" id="btn-calc">Calculate Quote</button>
+                    <button type="button" class="btn" id="btn-reset">Reset</button>
+                    <button type="button" class="btn" id="btn-save">Save Market Rate</button>
+                    <button type="button" class="btn" id="btn-load">Load Saved</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="card" aria-labelledby="results-title">
+            <h2 id="results-title">Results</h2>
+
+            <div id="results" class="results">
+                <div class="result-main">
+                    <div>
+                        <p class="label">Estimated Quote</p>
+                        <p id="estimate" class="value">—</p>
+                    </div>
+                    <div>
+                        <p class="label">Price Range</p>
+                        <p id="range" class="value">—</p>
+                    </div>
+                    <div>
+                        <p class="label">Validity</p>
+                        <p id="validity" class="value">—</p>
+                    </div>
+                </div>
+
+                <h3>Pricing Tiers</h3>
+                <div class="tiers">
+                    <div class="tier">
+                        <p class="tier-name">Basic</p>
+                        <p id="tier-basic" class="tier-value">—</p>
+                        <p class="tier-note">Standard scheduling, essentials only</p>
+                    </div>
+                    <div class="tier">
+                        <p class="tier-name">Premium</p>
+                        <p id="tier-premium" class="tier-value">—</p>
+                        <p class="tier-note">Priority scheduling, extended warranty</p>
+                    </div>
+                    <div class="tier">
+                        <p class="tier-name">Emergency</p>
+                        <p id="tier-emergency" class="tier-value">—</p>
+                        <p class="tier-note">Immediate dispatch</p>
+                    </div>
+                </div>
+
+                <h3>Breakdown</h3>
+                <ul id="breakdown" class="breakdown"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container">
+            <small>© <span id="year"></span> ServiceQuote Pro</small>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+

@@ -8,4 +8,4 @@ An intelligent pricing calculator that helps service providers generate accurate
 
 ### Product Requirements Document (PRD)
 
-- PRD: ./ServiceQuoteprd.md
+- PRD: ServiceQuoteprd.md

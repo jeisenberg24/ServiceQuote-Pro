@@ -6,8 +6,4 @@ An intelligent pricing calculator that helps service providers generate accurate
 
 - Vercel: https://service-quote-pro.vercel.app/
 
-### Product Requirements Document (PRD)
-
-- PRD (repo): ./ServiceQuoteprd.md
-- PRD (deployed): https://service-quote-pro.vercel.app/ServiceQuoteprd.md
 

@@ -6,4 +6,7 @@ An intelligent pricing calculator that helps service providers generate accurate
 
 - Vercel: https://service-quote-pro.vercel.app/
 
+### Docs
+
+- PRD: [ServiceQuote Pro - Product Requirements Document](ServiceQuoteprd.md)
 
